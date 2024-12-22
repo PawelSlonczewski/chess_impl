@@ -2,10 +2,7 @@ package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.pslonczewski.chad_chess_variant_impl.Alliance;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Board;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.BoardUtils;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Move;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Tile;
+import com.pslonczewski.chad_chess_variant_impl.engine.board.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +21,7 @@ public class Knight extends Piece {
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
-            final int candidateDestinationCoordinate;
-            candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             if (BoardUtils.isMoveWithinBoardBounds(candidateDestinationCoordinate)) {
 
@@ -39,12 +35,13 @@ public class Knight extends Piece {
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
 
                 if (!candidateDestinationTile.isTileOccupied()) {
-                    legalMoves.add(new Move() /* change after specializing Move class */);
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAtDestinationAlliance = pieceAtDestination.getPieceAlliance();
                     if (this.pieceAlliance != pieceAtDestinationAlliance) {
-                        legalMoves.add(new Move() /* change after specializing Move class */);
+                        legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
+                                pieceAtDestination));
                     }
                 }
             }

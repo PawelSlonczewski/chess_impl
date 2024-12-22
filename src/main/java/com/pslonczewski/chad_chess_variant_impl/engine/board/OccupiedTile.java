@@ -6,9 +6,9 @@ public final class OccupiedTile extends Tile {
 
     private final Piece pieceOnTile;
 
-    protected OccupiedTile(final int tileCoordinate, Piece piece) {
+    protected OccupiedTile(final int tileCoordinate, final Piece pieceOnTile) {
         super(tileCoordinate);
-        this.pieceOnTile = piece;
+        this.pieceOnTile = pieceOnTile;
     }
 
     @Override
