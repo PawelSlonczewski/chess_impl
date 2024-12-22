@@ -1,7 +1,7 @@
-package com.pslonczewski.chad_chess_variant_impl.board;
+package com.pslonczewski.chad_chess_variant_impl.engine.board;
 
 import com.google.common.collect.ImmutableMap;
-import com.pslonczewski.chad_chess_variant_impl.pieces.Piece;
+import com.pslonczewski.chad_chess_variant_impl.engine.pieces.Piece;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public abstract class Tile {
 
     protected final int tileCoordinate;
 
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
 
@@ -24,7 +24,7 @@ public abstract class Tile {
     }
 
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
-        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES.get(tileCoordinate);
+        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     protected Tile(int tileCoordinate) {

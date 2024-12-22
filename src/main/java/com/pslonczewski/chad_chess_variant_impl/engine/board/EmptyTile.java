@@ -1,6 +1,6 @@
-package com.pslonczewski.chad_chess_variant_impl.board;
+package com.pslonczewski.chad_chess_variant_impl.engine.board;
 
-import com.pslonczewski.chad_chess_variant_impl.pieces.Piece;
+import com.pslonczewski.chad_chess_variant_impl.engine.pieces.Piece;
 
 public final class EmptyTile extends Tile {
 

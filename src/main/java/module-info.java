@@ -7,8 +7,8 @@ module com.pslonczewski.chad_chess_variant_impl {
 
     opens com.pslonczewski.chad_chess_variant_impl to javafx.fxml;
     exports com.pslonczewski.chad_chess_variant_impl;
-    exports com.pslonczewski.chad_chess_variant_impl.board;
-    opens com.pslonczewski.chad_chess_variant_impl.board to javafx.fxml;
-    exports com.pslonczewski.chad_chess_variant_impl.pieces;
-    opens com.pslonczewski.chad_chess_variant_impl.pieces to javafx.fxml;
+    exports com.pslonczewski.chad_chess_variant_impl.engine.board;
+    opens com.pslonczewski.chad_chess_variant_impl.engine.board to javafx.fxml;
+    exports com.pslonczewski.chad_chess_variant_impl.engine.pieces;
+    opens com.pslonczewski.chad_chess_variant_impl.engine.pieces to javafx.fxml;
 }
