@@ -1,6 +1,6 @@
 package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
-import com.pslonczewski.chad_chess_variant_impl.Alliance;
+import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.Board;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.Move;
 
@@ -32,4 +32,25 @@ public abstract class Piece {
     }
 
     public abstract Collection<Move> calculateLegalMoves(final Board board);
+
+    protected enum PieceType {
+
+        PAWN("P"),
+        KNIGHT("N"),
+        BISHOP("B"),
+        ROOK("R"),
+        QUEEN("Q"),
+        KING("K");
+
+        private final String pieceName;
+
+        PieceType(final String pieceName) {
+            this.pieceName = pieceName;
+        }
+
+        @Override
+        public String toString() {
+            return this.pieceName;
+        }
+    }
 }

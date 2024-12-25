@@ -1,7 +1,7 @@
 package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
 import com.google.common.collect.ImmutableList;
-import com.pslonczewski.chad_chess_variant_impl.Alliance;
+import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.*;
 
 import java.util.ArrayList;
@@ -62,5 +62,10 @@ public class Bishop extends Piece {
 
     private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset) {
         return BoardUtils.EIGHTH_COLUMN[currentPosition] && candidateOffset == 1;
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.BISHOP.toString();
     }
 }

@@ -1,7 +1,7 @@
 package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
 import com.google.common.collect.ImmutableList;
-import com.pslonczewski.chad_chess_variant_impl.Alliance;
+import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.*;
 
 import java.util.ArrayList;
@@ -68,4 +68,8 @@ public class Knight extends Piece {
                 || candidateOffset == 10 || candidateOffset == 17);
     }
 
+    @Override
+    public String toString() {
+        return PieceType.KNIGHT.toString();
+    }
 }

@@ -1,7 +1,7 @@
 package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
 import com.google.common.collect.ImmutableList;
-import com.pslonczewski.chad_chess_variant_impl.Alliance;
+import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.Board;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.BoardUtils;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.MajorMove;
@@ -66,5 +66,10 @@ public class Pawn extends Piece {
         }
 
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.PAWN.toString();
     }
 }

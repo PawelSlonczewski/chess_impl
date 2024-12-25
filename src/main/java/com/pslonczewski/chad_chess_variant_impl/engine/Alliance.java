@@ -1,4 +1,4 @@
-package com.pslonczewski.chad_chess_variant_impl;
+package com.pslonczewski.chad_chess_variant_impl.engine;
 
 public enum Alliance {
     WHITE {
