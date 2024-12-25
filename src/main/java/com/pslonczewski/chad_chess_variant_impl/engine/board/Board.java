@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.pieces.*;
 import com.pslonczewski.chad_chess_variant_impl.engine.player.BlackPlayer;
+import com.pslonczewski.chad_chess_variant_impl.engine.player.Player;
 import com.pslonczewski.chad_chess_variant_impl.engine.player.WhitePlayer;
 
 import java.util.*;
@@ -40,6 +41,14 @@ public class Board {
             }
         }
         return builder.toString();
+    }
+
+    public Player getWhitePlayer() {
+        return this.whitePlayer;
+    }
+
+    public Player getBlackPlayer() {
+        return this.blackPlayer;
     }
 
     public Collection<Piece> getBlackPieces() {
