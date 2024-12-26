@@ -8,6 +8,8 @@ public abstract class Move {
     final Piece movedPiece;
     final int destinationCoordinate;
 
+    public static final Move NULL_MOVE = new NullMove();
+
     protected Move(final Board board, final Piece movedPiece, final int destinationCoordinate) {
         this.board = board;
         this.movedPiece = movedPiece;
@@ -22,5 +24,46 @@ public abstract class Move {
         return this.movedPiece;
     }
 
-    public abstract Board execute();
+    public int getCurrentCoordinate() {
+        return this.movedPiece.getPiecePosition();
+    }
+
+    public Board execute() {
+        final Board.Builder builder = new Board.Builder();
+
+        for (final Piece piece : this.board.getCurrentPlayer().getActivePieces()) {
+            if (!this.movedPiece.equals(piece)) {
+                builder.setPiece(piece);
+            }
+        }
+
+        for (final Piece piece : this.board.getCurrentPlayer().getOpponent().getActivePieces()) {
+            builder.setPiece(piece);
+        }
+        // move the moved piece
+        builder.setPiece(this.movedPiece.movePiece(this));
+        builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
+
+        return builder.build();
+    }
+
+    public static class MoveFactory {
+
+        private MoveFactory() {
+            throw new RuntimeException("Not instantiable!");
+        }
+
+        public static Move createMove(final Board board, final int currentCoordinate,
+                                      final int destinationCoordinate) {
+
+            for (final Move move : board.getAllLegalMoves()) {
+                if (move.getCurrentCoordinate() == currentCoordinate
+                        && move.getDestinationCoordinate() == destinationCoordinate) {
+                    return move;
+                }
+                return NULL_MOVE;
+            }
+
+        }
+    }
 }

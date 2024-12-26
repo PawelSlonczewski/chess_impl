@@ -2,7 +2,7 @@ package com.pslonczewski.chad_chess_variant_impl.engine.board;
 
 import com.pslonczewski.chad_chess_variant_impl.engine.pieces.Piece;
 
-public final class AttackMove extends Move {
+public class AttackMove extends Move {
 
     final Piece attackedPiece;
 

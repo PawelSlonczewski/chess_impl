@@ -1,6 +1,7 @@
 package com.pslonczewski.chad_chess_variant_impl.engine.board;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
 import com.pslonczewski.chad_chess_variant_impl.engine.pieces.*;
 import com.pslonczewski.chad_chess_variant_impl.engine.player.BlackPlayer;
@@ -149,6 +150,12 @@ public class Board {
         builder.setMoveMaker(Alliance.WHITE);
 
         return builder.build();
+    }
+
+    public Iterable<Move> getAllLegalMoves() {
+        return Iterables.unmodifiableIterable(
+                Iterables.concat( this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves())
+        );
     }
 
     public static class Builder {
