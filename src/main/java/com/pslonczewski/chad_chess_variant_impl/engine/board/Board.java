@@ -18,6 +18,8 @@ public class Board {
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
 
+    private final Player currentPlayer;
+
     private Board(Builder boardBuilder) {
         this.gameBoard = createGameBoard(boardBuilder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
@@ -28,6 +30,8 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+
+        this.currentPlayer = null;
     }
 
     @Override
@@ -49,6 +53,10 @@ public class Board {
 
     public Player getBlackPlayer() {
         return this.blackPlayer;
+    }
+
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     public Collection<Piece> getBlackPieces() {
