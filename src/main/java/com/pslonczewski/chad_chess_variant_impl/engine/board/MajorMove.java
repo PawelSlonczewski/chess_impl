@@ -10,7 +10,6 @@ public final class MajorMove extends Move {
 
     @Override
     public Board execute() {
-
         final Board.Builder builder = new Board.Builder();
 
         for (final Piece piece : this.board.getCurrentPlayer().getActivePieces()) {
