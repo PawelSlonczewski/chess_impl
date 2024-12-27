@@ -31,20 +31,20 @@ public abstract class Piece {
         return result;
     }
 
-    public int getPiecePosition() {
-        return this.piecePosition;
+    public PieceType getPieceType() {
+        return this.pieceType;
     }
 
     public Alliance getPieceAlliance() {
         return this.pieceAlliance;
     }
 
-    public boolean isFirstMove() {
-        return this.isFirstMove;
+    public int getPiecePosition() {
+        return this.piecePosition;
     }
 
-    public PieceType getPieceType() {
-        return this.pieceType;
+    public boolean isFirstMove() {
+        return this.isFirstMove;
     }
 
     @Override

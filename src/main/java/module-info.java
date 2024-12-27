@@ -13,4 +13,6 @@ module com.pslonczewski.chad_chess_variant_impl {
     opens com.pslonczewski.chad_chess_variant_impl.engine.pieces to javafx.fxml;
     exports com.pslonczewski.chad_chess_variant_impl.engine;
     opens com.pslonczewski.chad_chess_variant_impl.engine to javafx.fxml;
+    exports com.pslonczewski.chad_chess_variant_impl.gui;
+    opens com.pslonczewski.chad_chess_variant_impl.gui to javafx.fxml;
 }
