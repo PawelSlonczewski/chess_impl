@@ -14,7 +14,7 @@ public final class NullMove extends Move {
     }
 
     @Override
-    public boolean equals(final Object other) {
-        return false;
+    public int getCurrentCoordinate() {
+        return -1;
     }
 }
