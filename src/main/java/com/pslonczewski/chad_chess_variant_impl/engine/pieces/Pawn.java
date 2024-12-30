@@ -2,10 +2,7 @@ package com.pslonczewski.chad_chess_variant_impl.engine.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.pslonczewski.chad_chess_variant_impl.engine.Alliance;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Board;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.BoardUtils;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.MajorMove;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Move;
+import com.pslonczewski.chad_chess_variant_impl.engine.board.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +13,11 @@ public class Pawn extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATE = { 7, 8, 9, 16 };
 
     public Pawn(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.PAWN, piecePosition, pieceAlliance);
+        super(PieceType.PAWN, piecePosition, pieceAlliance, true);
+    }
+
+    public Pawn(final Alliance pieceAlliance, final int piecePosition, final boolean isFirstMove) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
@@ -35,14 +36,14 @@ public class Pawn extends Piece {
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                 legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));  /* TODO more work here (deal with promotions) */
             } else if (currentCandidateOffset == 16 && this.isFirstMove()
-                    && (BoardUtils.SEVENTH_RANK[this.piecePosition] && this.getPieceAlliance().isBlack())
-                    || (BoardUtils.SECOND_RANK[this.piecePosition] && this.getPieceAlliance().isWhite())) {
+                    && ((BoardUtils.SEVENTH_RANK[this.piecePosition] && this.getPieceAlliance().isBlack())
+                    || (BoardUtils.SECOND_RANK[this.piecePosition] && this.getPieceAlliance().isWhite()))) {
                 final int behindCandidateDestinationCoordinate = this.piecePosition
                         + (this.pieceAlliance.getDirection() * 8);
 
                 if (!board.getTile(behindCandidateDestinationCoordinate).isTileOccupied()
                         && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
-                    legalMoves.add(new MajorMove(board, this, behindCandidateDestinationCoordinate) /* TODO more work here */);
+                    legalMoves.add(new PawnJump(board, this, candidateDestinationCoordinate) /* TODO more work here */);
                 }
             } else if (currentCandidateOffset == 7
                     && !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite())
@@ -50,7 +51,7 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));  /* TODO more work here (deal with promotions) */
+                        legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));  /* TODO more work here (deal with promotions) */
                     }
                 }
             } else if (currentCandidateOffset == 9
@@ -59,7 +60,7 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));  /* TODO more work here (deal with promotions) */
+                        legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));  /* TODO more work here (deal with promotions) */
                     }
                 }
             }

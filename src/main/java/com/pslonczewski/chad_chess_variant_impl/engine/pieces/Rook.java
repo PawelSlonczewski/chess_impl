@@ -13,7 +13,11 @@ public class Rook extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -8, -1, 1, 8 };
 
     public Rook(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.ROOK, piecePosition, pieceAlliance);
+        super(PieceType.ROOK, piecePosition, pieceAlliance, true);
+    }
+
+    public Rook(final Alliance pieceAlliance, final int piecePosition, final boolean isFirstMove) {
+        super(PieceType.ROOK, piecePosition, pieceAlliance, isFirstMove);
     }
 
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -61,11 +65,11 @@ public class Rook extends Piece{
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
+        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -1);
     }
 
     private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset) {
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 9);
+        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == 1);
     }
 
     @Override
