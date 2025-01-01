@@ -296,6 +296,7 @@ public class Table {
             }
         }
 
+        // TODO this function creates a lot of moves, try to retrieve instead of calculate them again
         private void highlightLegals(final Board board) {
             if (highlightLegalMoves) {
                 for (final Move move : pieceLegalMoves(board)) {

@@ -13,11 +13,6 @@ public class AttackMove extends Move {
     }
 
     @Override
-    public Board execute() {
-        return null;
-    }
-
-    @Override
     public boolean isAttack() {
         return true;
     }

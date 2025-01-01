@@ -3,7 +3,6 @@ package com.pslonczewski.chad_chess_variant_impl.engine.board;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BoardUtils {

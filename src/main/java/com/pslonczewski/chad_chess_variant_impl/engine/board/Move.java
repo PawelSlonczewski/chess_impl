@@ -96,6 +96,10 @@ public abstract class Move {
         return builder.build();
     }
 
+    protected Board getBoard() {
+        return this.board;
+    }
+
     public static class MoveFactory {
 
         private MoveFactory() {

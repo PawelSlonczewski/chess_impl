@@ -7,6 +7,7 @@ public class PawnAttackMove extends AttackMove {
     public PawnAttackMove(final Board board, Piece movedPiece, final int destinationCoordinate,
                              final Piece attackedPiece) {
         super(board, movedPiece, destinationCoordinate, attackedPiece);
+        System.out.println("Pawn attack move created!");
     }
 
     @Override
