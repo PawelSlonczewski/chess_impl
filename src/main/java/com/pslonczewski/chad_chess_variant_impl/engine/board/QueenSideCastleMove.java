@@ -7,6 +7,7 @@ public class QueenSideCastleMove extends CastleMove {
     public QueenSideCastleMove(final Board board, final Piece movedPiece, final int destinationCoordinate,
                                final Rook castleRook, final int castleRookStart, final int castleRookDestination) {
         super(board, movedPiece, destinationCoordinate, castleRook, castleRookStart, castleRookDestination);
+        System.out.println("Queen Side castle move created!");
     }
 
     @Override

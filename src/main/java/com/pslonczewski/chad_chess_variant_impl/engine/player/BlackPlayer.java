@@ -54,8 +54,8 @@ public class BlackPlayer extends Player {
             }
             // white queen side castle
             if (!this.board.getTile(1).isTileOccupied()
-                    && this.board.getTile(2).isTileOccupied()
-                    && this.board.getTile(3).isTileOccupied()) {
+                    && !this.board.getTile(2).isTileOccupied()
+                    && !this.board.getTile(3).isTileOccupied()) {
                 final Tile rookTile = this.board.getTile(0);
                 if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
                     if (Player.calculateAttacksOnTile(2, opponentsLegals).isEmpty()

@@ -1,10 +1,8 @@
 package com.pslonczewski.chad_chess_variant_impl.gui;
 
 import com.google.common.collect.Lists;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Board;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.BoardUtils;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Move;
-import com.pslonczewski.chad_chess_variant_impl.engine.board.Tile;
+import com.pslonczewski.chad_chess_variant_impl.engine.board.*;
+import com.pslonczewski.chad_chess_variant_impl.engine.board.Move.MoveFactory;
 import com.pslonczewski.chad_chess_variant_impl.engine.pieces.Piece;
 import com.pslonczewski.chad_chess_variant_impl.engine.player.MoveTransition;
 
@@ -22,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
@@ -70,6 +70,10 @@ public class Table {
 
         this.gameFrame.setVisible(true);
         this.gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public Board getBoard() {
+        return this.chessBoard;
     }
 
     private JMenuBar createTableMenuBar() {
@@ -222,7 +226,7 @@ public class Table {
                         } else {
                             // second click
                             destinationTile = chessBoard.getTile(tileId);
-                            final Move move = Move.MoveFactory.createMove(chessBoard,
+                            final Move move = MoveFactory.createMove(chessBoard,
                                                                           sourceTile.getTileCoordinate(),
                                                                           destinationTile.getTileCoordinate());
 
@@ -296,7 +300,6 @@ public class Table {
             }
         }
 
-        // TODO this function creates a lot of moves, try to retrieve instead of calculate them again
         private void highlightLegals(final Board board) {
             if (highlightLegalMoves) {
                 for (final Move move : pieceLegalMoves(board)) {
@@ -312,8 +315,12 @@ public class Table {
         }
 
         private Collection<Move> pieceLegalMoves(Board board) {
-            if (humanMovedPiece != null && humanMovedPiece.getPieceAlliance() == board.getCurrentPlayer().getAlliance()) {
-                return humanMovedPiece.calculateLegalMoves(board);
+            if (humanMovedPiece != null
+                && humanMovedPiece.getPieceAlliance() == board.getCurrentPlayer().getAlliance()) {
+
+                return board.getCurrentPlayer().getLegalMoves().stream()
+                        .filter(move -> move.getMovedPiece().equals(humanMovedPiece))
+                        .collect(Collectors.toCollection(ArrayList::new));
             }
             return Collections.emptyList();
         }

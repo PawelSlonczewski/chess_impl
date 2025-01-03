@@ -40,7 +40,6 @@ public class GameHistoryPanel extends JPanel {
                 this.model.setValueAt(moveText, currentRow, 1);
                 currentRow++;
             }
-
         }
 
         if (!moveHistory.getMoves().isEmpty()) {

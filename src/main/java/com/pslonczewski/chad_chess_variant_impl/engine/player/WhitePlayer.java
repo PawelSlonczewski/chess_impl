@@ -54,8 +54,8 @@ public class WhitePlayer extends Player {
             }
             // white queen side castle
             if (!this.board.getTile(59).isTileOccupied()
-                    && this.board.getTile(58).isTileOccupied()
-                    && this.board.getTile(57).isTileOccupied()) {
+                    && !this.board.getTile(58).isTileOccupied()
+                    && !this.board.getTile(57).isTileOccupied()) {
                 final Tile rookTile = this.board.getTile(56);
                 if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
                     if (Player.calculateAttacksOnTile(58, opponentsLegals).isEmpty()

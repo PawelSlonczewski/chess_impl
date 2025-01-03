@@ -8,6 +8,8 @@ import com.pslonczewski.chad_chess_variant_impl.engine.board.Move.MoveFactory;
 import com.pslonczewski.chad_chess_variant_impl.engine.pieces.Piece;
 import com.pslonczewski.chad_chess_variant_impl.engine.board.BoardUtils;
 import com.pslonczewski.chad_chess_variant_impl.engine.player.MoveTransition;
+import com.pslonczewski.chad_chess_variant_impl.engine.player.ai.MiniMax;
+import com.pslonczewski.chad_chess_variant_impl.engine.player.ai.MoveStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -124,5 +126,39 @@ class BoardTest {
 //        assertTrue(t14.getTransitionBoard().getWhitePlayer().getActivePieces().size() == calculatedActivesFor(t14.getTransitionBoard(), Alliance.WHITE));
 //        assertTrue(t14.getTransitionBoard().getBlackPlayer().getActivePieces().size() == calculatedActivesFor(t14.getTransitionBoard(), Alliance.BLACK));
 
+    }
+
+    @Test
+    public void testFoolsMate() {
+        final Board board = Board.createStandardBoard();
+        final MoveTransition t1 = board.getCurrentPlayer().makeMove(
+                MoveFactory.createMove(board, BoardUtils.getCoordinateAtPosition("f2"),
+                        BoardUtils.getCoordinateAtPosition("f3")));
+
+        assertTrue(t1.getMoveStatus().isDone());
+
+        final MoveTransition t2 = t1.getTransitionBoard().getCurrentPlayer().makeMove(
+                MoveFactory.createMove(t1.getTransitionBoard(), BoardUtils.getCoordinateAtPosition("e7"),
+                        BoardUtils.getCoordinateAtPosition("e5")));
+
+        assertTrue(t2.getMoveStatus().isDone());
+
+        final MoveTransition t3 = t2.getTransitionBoard().getCurrentPlayer().makeMove(
+                MoveFactory.createMove(t2.getTransitionBoard(), BoardUtils.getCoordinateAtPosition("g2"),
+                        BoardUtils.getCoordinateAtPosition("g4")));
+
+        assertTrue(t3.getMoveStatus().isDone());
+
+        final MoveStrategy strategy = new MiniMax(4);
+
+        final Move aiMove = strategy.execute(t3.getTransitionBoard());
+
+        System.out.println(aiMove);
+
+        final Move bestMove = MoveFactory
+                .createMove(t3.getTransitionBoard(), BoardUtils.getCoordinateAtPosition("d8"),
+                        BoardUtils.getCoordinateAtPosition("h4"));
+
+        assertEquals(aiMove, bestMove);
     }
 }
